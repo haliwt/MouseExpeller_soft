@@ -69,10 +69,12 @@ void main(void)
 	InitT1();
 	InitADIO();
     InitMotorIO();
-	Init_Usart1();
+	#if USART_FLAG
+	   Init_Usart1();
+	#endif 
 	InitFanEdgeIO();
 	InitLed();
-	InitKey();
+	//InitKey();
 	InitPowerIn();
 	Init_IR();
 	//InitBuzzer(); //WT.EIDT
@@ -90,7 +92,7 @@ void main(void)
 
 	while(1)
 	{
-		LedGreenON();
+		
 		
 		CheckWall();
 		kk= CheckKeyVoltage();
@@ -100,8 +102,8 @@ void main(void)
 
 		    LedGreenON();
 		    P3_5 =0;
-			P3_4 = 0;
-			P2_0 =0;
+			P2_6 = 0;
+			P2_7 =0;
 
 		}
 		if(g_KeyValue == 0x04 || g_KeyValue ==0x03){
@@ -109,8 +111,8 @@ void main(void)
 
 		   
 		    P3_5 =1;
-			P3_4 = 1;
-			P2_0 =1;
+			P2_6 = 1;
+			P2_7 =1;
 
 		}
 		#if 0
@@ -139,7 +141,7 @@ void TIMER1_Rpt(void) interrupt TIMER1_VECTOR
   t_10ms++;  //0.1ms 
 	
   ReadAD5ms();
-  MidIR_Count();
+ // MidIR_Count();
 
 	if(t_1ms++>10){
 		t_1ms = 0;
@@ -152,7 +154,6 @@ void TIMER1_Rpt(void) interrupt TIMER1_VECTOR
 		t_100ms++;
 		t_1s++;
 		RunMs++;
-		//CheckBuzzer();
 		SetMotorForwardPWMUP();
 		if(t_100ms>9)
 		{
@@ -170,7 +171,7 @@ void TIMER1_Rpt(void) interrupt TIMER1_VECTOR
 			CheckEdgeCurrent();
 			CheckFanCurrent();
 			
-			LedTip(SysFlag);
+			//LedTip(SysFlag);
 		}
 		CheckVoltage();
 		if(t_1s>99)

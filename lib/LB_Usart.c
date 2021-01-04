@@ -19,6 +19,8 @@ version  : 见文件尾端
 #include "LB_Usart.h"
 
 #endif
+
+#if USART_FLAG 
  void Init_Usart1()
   {
 	P2M6 = 0xC2;				        //P26设置为推挽输出
@@ -66,3 +68,4 @@ void UART1_Rpt(void) interrupt UART1_VECTOR
 		}
 	}									
 }
+#endif 
