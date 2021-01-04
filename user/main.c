@@ -68,7 +68,7 @@ void main(void)
 	InitSysclk(1);
 	InitT1();
 	InitADIO();
-  InitMotorIO();
+    InitMotorIO();
 	Init_Usart1();
 	InitFanEdgeIO();
 	InitLed();
@@ -93,8 +93,26 @@ void main(void)
 		LedGreenON();
 		
 		CheckWall();
-		 CheckKeyVoltage();
+		kk= CheckKeyVoltage();
 
+		if(g_KeyValue == 0x08 || g_KeyValue ==0x07){
+
+
+		    LedGreenON();
+		    P3_5 =0;
+			P3_4 = 0;
+			P2_0 =0;
+
+		}
+		if(g_KeyValue == 0x04 || g_KeyValue ==0x03){
+
+
+		   
+		    P3_5 =1;
+			P3_4 = 1;
+			P2_0 =1;
+
+		}
 		#if 0
 		if(AutoDC_ReChargeStatus()!=1){
 			CheckWall();
@@ -134,7 +152,7 @@ void TIMER1_Rpt(void) interrupt TIMER1_VECTOR
 		t_100ms++;
 		t_1s++;
 		RunMs++;
-		CheckBuzzer();
+		//CheckBuzzer();
 		SetMotorForwardPWMUP();
 		if(t_100ms>9)
 		{
@@ -180,12 +198,14 @@ void TIMER1_Rpt(void) interrupt TIMER1_VECTOR
 			SBUF=Usart1Send[SendCount];
 			}
 			#endif 
-			
+			 g_KeyValue=KEY_Voltage%100;
 			Usart1Send[0]=2;
 			Usart1Send[1]=KEY_Voltage/100;
-			Usart1Send[2]=KEY_Voltage%100;
+			Usart1Send[2]=g_KeyValue;//KEY_Voltage%100;
+			
 			SendCount=1;
 			SBUF=Usart1Send[SendCount];
+			
 			/*
 			Usart1Send[0]=12;
 			Usart1Send[1]=Voltage/100;

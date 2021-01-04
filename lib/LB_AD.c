@@ -330,8 +330,9 @@ INT8U  CheckKeyVoltage(void)
        KEY_Voltage=KEY_Voltage+ad[j];
       }
 	 
-     KEY_Voltage= KEY_Voltage/10;
+       KEY_Voltage= KEY_Voltage/10;
 	}
+   return KEY_Voltage;
   
  }
 /***************************************************************************************

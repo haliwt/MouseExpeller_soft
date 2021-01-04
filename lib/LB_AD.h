@@ -44,6 +44,7 @@ KAKA_AD_EXT INT16U outdata EdgeCurrentAD[8];
 KAKA_AD_EXT INT8U WallDp[4];
 KAKA_AD_EXT INT8U  outdata  LCurrent;
 KAKA_AD_EXT INT8U  outdata  RCurrent;
+KAKA_AD_EXT INT8U   g_KeyValue ;
 KAKA_AD_EXT INT16U  LCurrentMax;
 KAKA_AD_EXT INT16U  RCurrentMax;
 KAKA_AD_EXT INT16U  FanCurrent;
