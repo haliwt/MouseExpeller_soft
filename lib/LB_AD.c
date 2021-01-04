@@ -2,12 +2,12 @@
 
 ---------- file information -----------------------------------------------
 file name: 
-define   : <�ļ�˵��>
-version  : ���ļ�β��
+define   : <锟侥硷拷说锟斤拷>
+version  : 锟斤拷锟侥硷拷尾锟斤�?
 ---------------------------------------------------------------------------
 */
 
-//ȫ�ֱ�������
+//全锟街憋拷锟斤拷锟斤拷锟斤拷
 #define  KAKA_AD_GB
 
 #ifdef   CodeC_Includes
@@ -20,10 +20,10 @@ version  : ���ļ�β��
 
 #endif
 /**
-  * @˵��  	��ʱ����
-  * @����  	fui_i : ��ʱʱ��
-  * @����ֵ ��
-  * @ע 	Fcpu = 16MHz,fui_i = 1ʱ,��ʱʱ��ԼΪ2us
+  * @说锟斤拷  	锟斤拷时锟斤拷锟斤拷
+  * @锟斤拷锟斤拷  	fui_i : 锟斤拷时时锟斤拷
+  * @锟斤拷锟斤拷�?锟斤�?
+  * @�?	Fcpu = 16MHz,fui_i = 1�?锟斤拷时时锟斤拷约为2us
   */
 void Delay_2us(unsigned int fui_i)
 {
@@ -31,67 +31,81 @@ void Delay_2us(unsigned int fui_i)
 }
 void InitADIO(void)
 {
-	P0M0 = 0x02;				        //P25����Ϊģ������
-	P0M1 = 0x02;				        //P02����Ϊģ������
-	P0M2 = 0x02;				        //P03����Ϊģ������
-	P0M4 = 0x02;				        //P04����Ϊģ������
-	P0M5 = 0x02;				        //P05����Ϊģ������
-	P0M6 = 0x02;				        //P06����Ϊģ������
-	P0M7 = 0x02;				        //P07����Ϊģ������
-	P2M4 = 0x02;				        //P25����Ϊģ������
-	P2M5 = 0x02;				        //P25����Ϊģ������
-	P0M3 = 0X80;
+	P0M0 = 0x02;				        //P0_0 --setup GPIO analog input
+	P0M1 = 0x02;				        //P0_2 ---setup GPIO analog input
+	P0M2 = 0x02;				        //P03锟斤拷锟斤拷为模锟斤拷锟斤拷锟斤�?
+	P0M4 = 0x02;				        //P04锟斤拷锟斤拷为模锟斤拷锟斤拷锟斤�?
+	P0M5 = 0x02;				        //P05锟斤拷锟斤拷为模锟斤拷锟斤拷锟斤�?
+	P0M6 = 0x02;				        //P06锟斤拷锟斤拷为模锟斤拷锟斤拷锟斤�?
+	P0M7 = 0x02;				        //P07锟斤拷锟斤拷为模锟斤拷锟斤拷锟斤�?
+	P2M2 = 0x02;				        //P2_2 ---AN10 key input analog 
+	                     
 
    ///*
-    P2M0 = 0xC2;                        //P20����Ϊ�������
-    P0M3 = 0xC2;                        //P03����Ϊ�������
-	PWM2_MAP = 0x03;					//PWM1ͨ��ӳ��P03��
-	PWM21_MAP = 0x20;					//PWM1ͨ��ӳ��P03��
-    PWM2C = 0x00;						//PWM1����Ч��PWM11����Ч��ʱ��8��Ƶ 
-    PWMM |= 0x40;						//PWM1������
+    P3M0 = 0xC2;  //WT.EDIT crash        //P20-Push-pull output "�������"
+    P3M1 = 0xC2;  //WT.EDIT ground      //P03-Puse-pull output "�������"
+	PWM2_MAP = 0X31;//0x03;				//PWM2 P3_1    --GPIO map to GPIO P0_3
+	PWM21_MAP = 0X30;//0x20;					//PWM1通锟斤拷映锟斤拷P03锟斤�?
+    PWM2C = 0x00;						//PWM1锟斤拷锟斤拷效锟斤拷PWM11锟斤拷锟斤拷效锟斤拷时锟斤拷8锟斤拷频 
+    PWMM |= 0x40;						//PWM1锟斤拷锟斤拷锟斤�?
 
 
-	PWM2PH = 0x0;						//���ڸ�4λ����Ϊ0x03
-	PWM2PL = 0x10;						//���ڵ�8λ����Ϊ0xFF
+	PWM2PH = 0x0;						//锟斤拷锟节革�?位锟斤拷锟斤拷为0x03
+	PWM2PL = 0x10;						//锟斤拷锟节碉�?位锟斤拷锟斤拷为0xFF
 
 
 
-	PWM2DH = 0x00;						//PWM1��4λռ�ձ�0x01
-	PWM2DL = 0x02;						//PWM1��8λռ�ձ�0x55
-	PWM2DTH = 0x00;						//PWM1��4λռ�ձ�0x01
-	PWM2DTL = 0x02;						//PWM1��8λռ�ձ�0x55
-	PWMEN |= 0x44;						//ʹ��PWM2
+	PWM2DH = 0x00;						//PWM1锟斤�?位占锟秸憋拷0x01
+	PWM2DL = 0x02;						//PWM1锟斤�?位占锟秸憋拷0x55
+	PWM2DTH = 0x00;						//PWM1锟斤�?位占锟秸憋拷0x01
+	PWM2DTL = 0x02;						//PWM1锟斤�?位占锟秸憋拷0x55
+	PWMEN |= 0x44;						//使锟斤拷PWM2
    //*/
 
 }
 
 void SeleADChanel(INT8U ADChanel)
 {
-	ADCC0 = 0x81;						//��ADCת����Դ
-	ADCC1 = (ADChanel&0X0F);			//ѡ���ⲿͨ��0
-	ADCC2 = 0x4f;						//ת�����12λ���ݣ������Ҷ��룬ADCʱ��16��Ƶ
+	ADCC0 = 0x81;						//锟斤拷ADC转锟斤拷锟斤拷源
+	ADCC1 = (ADChanel&0X0F);			//选锟斤拷锟解部通锟斤拷0
+	ADCC2 = 0x4f;						//转锟斤拷锟斤拷锟�?2位锟斤拷锟捷ｏ拷锟斤拷锟斤拷锟揭讹拷锟诫，ADC时锟斤拷16锟斤拷频
 
 }
 
 void StartAD()
 {
-	ADCC0&=0XDF;
-	ADCC0 |= 0x40;					//����ADCת��
+	ADCC0&=0XDF;            //internal voltage is 3V
+	ADCC0 |= 0x40;			//ref: VDD
 }
 void SetADINT(void)
 {
-    EADC = 1;                                   //ʹ��ADC�ж�
+    EADC = 1;             //ADC transform
     EA = 1;
 }
 
-
+/**********************************************************************
+	*
+	*Function Name:void  SetAD(INT8U ADChanel)
+	*Function:AD transform
+	*Input Ref: analog input channel 
+	*
+	*
+**********************************************************************/
 void  SetAD(INT8U ADChanel)
 {
-  code INT8U ADCC[9]={2,1,0,4,5,6,7,12,13};
+  code INT8U ADCC[9]={2,1,0,3,4,5,6,7,10}; //WT.EDIT.2021.01.02
   SeleADChanel(ADCC[ADChanel]);
   SetADINT();
   StartAD();
 }
+/**********************************************************************
+	*
+	*Function Name:void  void ReadAD5ms()
+	*Function:AD transform
+	*Input Ref: NO
+	*Output Ref: NO
+	*
+**********************************************************************/
 void ReadAD5ms()
 {
   static INT8U i=0;
@@ -109,11 +123,11 @@ void ReadAD5ms()
 	 {
 	   if(ADCtl)
 	   { 
-		   if(ADFlag)  //����PMW ռ�ձ� ������IR����   �س� ���շ���ͽ��յ� ���ʵ㡣 
+		   if(ADFlag)  //锟斤拷锟斤拷PMW 占锟秸憋�?锟斤拷锟斤拷锟斤拷IR锟斤拷锟斤拷   锟截筹拷 锟斤拷锟秸凤拷锟斤拷徒锟斤拷盏锟�?锟斤拷锟绞点�?
 		   {
 			 //P0_3 = 1;
-			 PWM2DL = 0x8; // 
-			 PWM2DTL = 0x8;
+			  PWM2DL = 0x8; // 
+			  PWM2DTL = 0x8;
 			 ADFlag=0;
 			 ADFlashFlag=1;
 		   }
@@ -287,21 +301,49 @@ void CheckRCurrent()
 
 void CheckVoltage()
 {
-   //Voltage=(Voltage*9+((AD5ms[0])/25)*6)/10;
+	 
+    //Voltage=(Voltage*9+((AD5ms[0])/25)*6)/10;
    Voltage=(Voltage*9+(AD5ms[0]/4))/10;
    //4000*3/40960
 }
+/**********************************************************************
+	*
+	*Function Name:CheckKeyVoltage(void)
+	*Function:AD transform
+	*Input Ref: NO
+	*Output Ref: NO
+	*
+**********************************************************************/
+INT8U  CheckKeyVoltage(void)
+{
+   INT8U ad[10],i,j;
+   INT16U adcValue;
+   SetAD(8);
+   adcValue=(Voltage*9+(AD5ms[8]/4))/10;
+   //4000*3/40960
+   i++;
+   ad[i-1]=adcValue /100;
+   if(i==10){
+      i=0;
+	 for(j=0;j<10;j++){
 
+       KEY_Voltage=KEY_Voltage+ad[j];
+      }
+	 
+     KEY_Voltage= KEY_Voltage/10;
+	}
+  
+ }
 /***************************************************************************************
-  * @˵��  	ADC�жϷ�����
-  *	@����	��
-  * @����ֵ ��
-  * @ע		��
+  * @说锟斤拷  	ADC锟叫断凤拷锟斤拷锟斤�?
+  *	@锟斤拷锟斤拷	锟斤�?
+  * @锟斤拷锟斤拷�?锟斤�?
+  * @�?	锟斤�?
 ***************************************************************************************/
 void ADC_Rpt() interrupt ADC_VECTOR
 {
 
-    IE1 &=~ 0x40;                       //�ر�ADC�ж�
-    ADCC0 &=~ 0x20;						//���ADC�жϱ�־λ
+    IE1 &=~ 0x40;                       //锟截憋拷ADC锟叫讹拷
+    ADCC0 &=~ 0x20;						//锟斤拷锟紸DC锟叫断憋拷志�?
 
 } 

@@ -75,7 +75,7 @@ void main(void)
 	InitKey();
 	InitPowerIn();
 	Init_IR();
-	InitBuzzer();
+	//InitBuzzer(); //WT.EIDT
 	InitIMP();
 	
 	ADCtl=0;   //ǿ���ź� IR �����־ 0--�رգ� 1 --��
@@ -90,7 +90,12 @@ void main(void)
 
 	while(1)
 	{
+		LedGreenON();
 		
+		CheckWall();
+		 CheckKeyVoltage();
+
+		#if 0
 		if(AutoDC_ReChargeStatus()!=1){
 			CheckWall();
 			CheckRechargeIR();
@@ -99,6 +104,7 @@ void main(void)
 			sysMode(kk);
 			CheckRun();
 		}
+		#endif 
 		
 	}
 }
@@ -174,6 +180,12 @@ void TIMER1_Rpt(void) interrupt TIMER1_VECTOR
 			SBUF=Usart1Send[SendCount];
 			}
 			#endif 
+			
+			Usart1Send[0]=2;
+			Usart1Send[1]=KEY_Voltage/100;
+			Usart1Send[2]=KEY_Voltage%100;
+			SendCount=1;
+			SBUF=Usart1Send[SendCount];
 			/*
 			Usart1Send[0]=12;
 			Usart1Send[1]=Voltage/100;

@@ -50,6 +50,7 @@ KAKA_AD_EXT INT16U  FanCurrent;
 KAKA_AD_EXT INT16U  EdgeCurrent;
 KAKA_AD_EXT INT16U  EdgeCurrentCount;
 KAKA_AD_EXT INT16U  Voltage;
+KAKA_AD_EXT INT16U  KEY_Voltage;
 KAKA_AD_EXT INT16U  EdgeCurrentLessCount;
 
 KAKA_AD_EXT INT16U  EdgeCurrentOverCount;
@@ -63,4 +64,6 @@ KAKA_AD_EXT	void CheckVoltage();
 KAKA_AD_EXT	void CheckWall();
 KAKA_AD_EXT  void CheckEdgeCurrent()	;
 KAKA_AD_EXT  void CheckFanCurrent();
+KAKA_AD_EXT  INT8U CheckKeyVoltage(void);
+KAKA_AD_EXT  void  SetAD(INT8U ADChanel);
 #endif

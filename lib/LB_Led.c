@@ -46,38 +46,41 @@ void InitT1(void)
 
 void InitLed(void)
 {
-  P3M3=0X84;
-  P3_3=1;
-   P2M3=0X84;
-  P2_3=1;
+  P2M0 = 0x84;
+  P3M5=0X84;
+  
+  P3M4=0X84;
+  P3_5=1;
+  P3_4=1;
+  P2_0 = 1;
 }
 
 
 
 void LedRedON()
 {
-//	P2_3=0;
-  P3_3=0;
+
+  P3_4=0;
 }
 
 
 void LedRedOff()
 {
- //P2_3=1;
-   P3_3=1; //red 
+
+   P3_4=1; //red 
 }
 
 void LedGreenON()
 {
-//  P3_3=0;
-  P2_3=0;
+
+  P2_0=0;
 }
 
 
 void LedGreenOff()
 {
-//  P3_3=1;
-  P2_3=1; //green
+
+  P2_0=1; //green
 }
 void InitKey(void)
 {
@@ -238,8 +241,8 @@ INT8U ReadPowerAutoIn(void)
 void InitBuzzer(void)
 {
 
-    P2M2 = 0xC2;                        //P35����Ϊ�������
-	PWM3_MAP = 0x22;					//PWM3ӳ��P35��
+    //P2M2 = 0xC2;   //WT.EDIT                      //P35����Ϊ�������
+	//PWM3_MAP = 0x22;	//WT.EDIT				//PWM3ӳ��P35��
 	//���ڼ��� 	= 0xFF / (Fosc / PWM��Ƶϵ��)		��Fosc��ϵͳʱ�����õĲ��֣�
 	//			= 0xFF /(16000000 / 4)			
 	// 			= 255 /4000000
@@ -273,7 +276,7 @@ void BuzzerOff()
 {
  // BuzzerFlag=0;
   PWM3C = 0x00; 						//ʹ��PWM3���ر��жϣ����������ʱ��32��Ƶ
-  P2_2=1;
+ // P2_2=1;
 }
 
 void SetBuzzerTime(INT8U time)
