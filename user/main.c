@@ -64,6 +64,7 @@ void main(void)
 {
 	
 	INT8U kk,i,abc[3],z=0;
+	static INT8U m,n;
 	
 	
 	InitSysclk(1);
@@ -105,31 +106,39 @@ void main(void)
 		// KEY_Scan();
 		// kk =g_KeyValue;
 		 g_KeyValue= KEY_Voltage /100;
-		SBUF = g_KeyValue;
+		//SBUF = g_KeyValue;
 		
-		 if(g_KeyValue ==0x00){
+		 if(g_KeyValue ==0x00 ||g_KeyValue==0x01 ){
 			 RunMode =1;
 			 LED_B = 1;
 			 DiffMode = 1;
 
 		 }
 		  if(g_KeyValue==0x04 ||g_KeyValue==0x03){
-		     LED_B=1;
+		      LED_B=1;
 			 RunMode =2;
 		   // Sharp_LED();
 			 DiffMode =2;
-			  SharpTime_Hz=0;
-			SharpWorksTime_Total=0;
-			SharpWorksTime=0;
+			 
 			
 		 }
 		
 		  if(g_KeyValue == 0x08 ||g_KeyValue==0x07){
 			DiffMode = 3;
-			RunMode =3;
-				  SharpTime_Hz=0;
-		SharpWorksTime_Total=0;
-		SharpWorksTime=0;
+			
+		    m= m ^ 0x01;
+			if(m==1){
+			   RunMode =3;
+
+			}
+			else {
+			RunMode =0;
+			LED_B =1;
+
+			}
+		    SharpTime_Hz=0;
+		    SharpWorksTime_Total=0;
+		     SharpWorksTime=0;
 			
          }
 	 }
@@ -179,7 +188,7 @@ void TIMER1_Rpt(void) interrupt TIMER1_VECTOR
 		SharpTime_Hz++;
 		SharpWorksTime_Total++;
 		SetMotorForwardPWMUP();
-		g_KeyValue=KEY_Voltage %100;
+		//g_KeyValue=KEY_Voltage / 100;
 		if(t_100ms>9)
 		{
 			t_100ms=0;
@@ -231,10 +240,10 @@ void TIMER1_Rpt(void) interrupt TIMER1_VECTOR
 			#if USART_FLAG 
 			//g_KeyValueLow= CheckKeyVoltage();
 			//g_KeyValue= KEY_Voltage % 100;
-			Usart1Send[0]=2;
+			Usart1Send[0]=3;
 			Usart1Send[1]=KEY_Voltage/100;
 			Usart1Send[2]=g_KeyValue;//KEY_Voltage %100;//KEY_Voltage % 100;//KEY_Voltage%100;
-			
+			Usart1Send[3] = RunMode ;
 			SendCount=1;
 			SBUF=Usart1Send[SendCount];
 			// g_KeyValue=KEY_Voltage %100;
