@@ -241,7 +241,7 @@ static INT8U KEY_Scan(void)
 			 if(pressflg==1)
 			     worksMode.iPowerFlag=1;
 			 else 
-			    worksMode.iPowerFlag=1;
+			    worksMode.iPowerFlag=0;
 			
 			
 	   break;

@@ -1255,12 +1255,12 @@ void  CheckRun()
 			break;    
 			case 1 : // powern on
 			    if( worksMode.iPowerFlag==1){
-           		  LED_R = 0;
-				  worksMode.iPowerFlag=1;
+           		    LED_R = 0;
+				   
 				}
 				else {
 					LED_R =1;
-					worksMode.iPowerFlag=0;
+					
 				}
             break;
 
