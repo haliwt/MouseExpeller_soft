@@ -315,9 +315,9 @@ void Sharp_LED(INT8U sharp)
 		   }
 		   else  if(SharpWorksTime > 1 && SharpWorksTime <=5){
 				P2_0=0;
-			   SharpWorksTime =0;
-			
+			    
 		   }
+		   else if(SharpWorksTime > 5) SharpWorksTime =0;
 	   }
 	   else {
 
@@ -346,9 +346,10 @@ void Sharp_LED(INT8U sharp)
 		   }
 		   else  if(SharpWorksTime > 2 && SharpWorksTime <=10){
 				  P2_0=0;
-			      SharpWorksTime =0;
+			      
 			
 		   }
+		   else if(SharpWorksTime > 10) SharpWorksTime =0;
 	   }
 	   else {
 
@@ -363,7 +364,7 @@ void Sharp_LED(INT8U sharp)
 	   
 	   break;
 	   case 3:
-		     //3HZ ,50% ,T= 333ms ,works =3s stop =12s total =120s 
+		     //3HZ ,50% ,T= 333ms ,works =3s stop =12s total =150s 
 	   if(SharpWorksTime_Total<=150){
 		   if(SharpWorksTime <=3){
 			   if(SharpTime_Hz <=16 ){ //333/2= 166ms
@@ -377,9 +378,8 @@ void Sharp_LED(INT8U sharp)
 		   }
 		   else  if(SharpWorksTime > 3 && SharpWorksTime <=15){
 				  P2_0=0;
-			      SharpWorksTime =0;
-			
-		   }
+			}
+		   else if(SharpWorksTime > 15) SharpWorksTime =0;
 	   }
 	   else {
 

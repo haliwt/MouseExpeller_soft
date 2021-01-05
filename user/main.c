@@ -124,7 +124,7 @@ void main(void)
 			 DiffMode = 1;
 
 		 }
-		  if(g_KeyValue==0x04 || g_KeyValue==0x03){
+		 else if(g_KeyValue==0x04 || g_KeyValue==0x03){
 		      LED_B=1;
 			 RunMode =2;
 		   // Sharp_LED();
@@ -135,8 +135,7 @@ void main(void)
 			 
 			
 		 }
-		
-		  if(g_KeyValue == 0x08 ||g_KeyValue==0x07){
+	    else if(g_KeyValue == 0x08 ||g_KeyValue==0x07){
 			DiffMode = 3;
 			
 		    m= m ^ 0x01;
@@ -199,7 +198,7 @@ void TIMER1_Rpt(void) interrupt TIMER1_VECTOR
 		t_1s++;
 		RunMs++;
 		SharpTime_Hz++;
-		SharpWorksTime_Total++;
+		
 		SetMotorForwardPWMUP();
 		g_KeyValue=KEY_Voltage / 100;
 		if(t_100ms>9)
@@ -229,6 +228,7 @@ void TIMER1_Rpt(void) interrupt TIMER1_VECTOR
 			keyPrssTime++; 
 			twinkle++;
 			SharpWorksTime++;
+			SharpWorksTime_Total++;
 			MidWallOffSecond++;
 			#if 0
 			if(SendCount>=12)
