@@ -63,7 +63,7 @@ void InitSysclk(INT8U SYS)
 void main(void)
 {
 	
-	INT8U kk,i,abc[3],z=0;
+	INT8U kk,i,abc[5],z=0;
 	static INT8U m=0,n=0;
 	
 	
@@ -106,8 +106,18 @@ void main(void)
 		// KEY_Scan();
 		// kk =g_KeyValue;
 		 g_KeyValue= KEY_Voltage /100;
+		 i++;
+		 abc[i]=g_KeyValue;
+		 if(i >=2)
+		 {
+		    i=0;
+			if(abc[1]==abc[2])g_KeyValue= KEY_Voltage /100;
+			 else g_KeyValue= 0xff;
+			 z=1;
+		 }
 		//SBUF = g_KeyValue;
-		
+		if(z==1){
+			z=0;
 		 if(g_KeyValue ==0x00 ||g_KeyValue==0x01 ){
 			 RunMode =1;
 			 LED_B = 1;
@@ -142,6 +152,7 @@ void main(void)
 			
          }
 	 }
+ }
 		// KEY_Handing(kk);
 		//Sharp_LED();
 		
