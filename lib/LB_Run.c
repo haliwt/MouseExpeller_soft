@@ -2633,14 +2633,14 @@ if(Key==1)
    cleanWorks.pressPowerKey++;
    if(cleanWorks.pressPowerKey>4)cleanWorks.pressPowerKey=0;
    Step=cleanWorks.pressPowerKey;
-   SBUF =  Step;
+   //SBUF =  Step;
  }
   else if(Key==2){ //works mode ----cleaning button        
 		Mode =1;
 		cleanWorks.worksNumber++;
 		if(cleanWorks.worksNumber>5)cleanWorks.worksNumber=0;
 		Step=cleanWorks.worksNumber  ;
-		SBUF =  Step;
+		//SBUF =  Step;
  }
     ////power on of initial: Mode=2;Step=0;RunMode=1;RunStep=0;
 	switch(Mode)

@@ -2,8 +2,8 @@
 
 ---------- file information -----------------------------------------------
 file name: 
-define   : <文件说明>
-version  : 见文件尾端
+define   : <锟侥硷拷说锟斤拷>
+version  : 锟斤拷锟侥硷拷尾锟斤拷
 ---------------------------------------------------------------------------
 */
 #ifndef  LB_Usart_h
@@ -21,14 +21,14 @@ version  : 见文件尾端
 #endif
 
 
-//全局变量声明
+//全锟街憋拷锟斤拷锟斤拷锟斤拷
 #ifdef  KAKA_Usart_GB
 #define KAKA_Usart_EXT
 #else
 #define  KAKA_Usart_EXT extern
 #endif
 
-#define USART_FLAG    1
+#define USART_FLAG    0
 KAKA_Usart_EXT INT8U SendCount;
 KAKA_Usart_EXT INT8U Usart1Send[20];
 KAKA_Usart_EXT  void Init_Usart1();
