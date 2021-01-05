@@ -95,25 +95,29 @@ void main(void)
 		
 		
 		CheckWall();
-		kk= CheckKeyVoltage();
+		CheckKeyVoltage();
+		switch(g_KeyValue){
 
-		if(g_KeyValue == 0x08 || g_KeyValue ==0x07){
+		case 0x08 : //Mode transform
+			LED_B =0;
+            
+		break;
+		case 0x07:
+              g_KeyValue = 0x08;
 
+		break;
+		case 0x04: //light Led
+		
+		   LED_G =0 ;
+        break;
+		case 0x03:
+				g_KeyValue = 0x04;
+		break;
 
-		    LedGreenON();
-		    P3_5 =0;
-			P2_6 = 0;
-			P2_7 =0;
+		case 0:
+			 LED_R = 0;
 
-		}
-		if(g_KeyValue == 0x04 || g_KeyValue ==0x03){
-
-
-		   
-		    P3_5 =1;
-			P2_6 = 1;
-			P2_7 =1;
-
+		break;
 		}
 		#if 0
 		if(AutoDC_ReChargeStatus()!=1){

@@ -71,8 +71,7 @@ KAKA_Run_EXT INT8U T1msFlag;
 //vic 2020.12.24
 #define KEY1			//P3_4//P3_5//P3_4  //WT.EDIT
 #define KEY2			//P3_5//P3_4//P3_5
-#define LED_R			P3_3
-#define LED_G			P2_3
+
 KAKA_Run_EXT INT8U SysFlag;
 
 enum{

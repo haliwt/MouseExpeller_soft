@@ -46,13 +46,13 @@ void InitT1(void)
 
 void InitLed(void)
 {
-  P3M5 = 0xC2;//P2M0 = 0x94; //pull down SMT 
-  P2M6 =0xC2 ;//P3M5=0X94;
+  P3M5 = 0x84;//P2M0 = 0x94; //pull down SMT 
+  P2M6 =0x84 ;//P3M5=0X94;
   
-  P2M7 = 0xC2;//P3M4=0X94;
-  P2_6=0;   //LED3 =
-  P2_7=0;  //LED2= 
-  P3_5 = 0;  //LED1=
+  P2M7 = 0x84;//P3M4=0X94;
+  P2_6=1;   //LED3 =
+  P2_7=1;  //LED2= 
+  P3_5 = 1;  //LED1=
 }
 
 
