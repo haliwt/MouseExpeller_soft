@@ -1254,20 +1254,15 @@ void  CheckRun()
 						
 			break;    
 			case 1 : // powern on
-			    if( worksMode.iPowerFlag==1){
+			    
            		    LED_R = 0;
 				
 				   
-				}
-				else {
-					LED_R =1;
-					
-					
-				}
+			
             break;
 
 			case 2: //sharp led function
-				if(DiffMode ==2){
+				if(DiffMode ==2 && DiffMode !=1){
 					LED_G = 0;
 					LED_B=0;
 					Sharp_LED();

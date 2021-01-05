@@ -64,7 +64,7 @@ void main(void)
 {
 	
 	INT8U kk,i,abc[3],z=0;
-	static INT8U m,n;
+	static INT8U m=0,n=0;
 	
 	
 	InitSysclk(1);
@@ -132,8 +132,8 @@ void main(void)
 
 			}
 			else {
-			RunMode =0;
-			LED_B =1;
+				RunMode =0;
+				LED_B =1;
 
 			}
 		    SharpTime_Hz=0;
