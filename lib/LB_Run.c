@@ -633,7 +633,7 @@ void Auto_ReChargeBattery(void)
 void CleanMode_BOW(void)
 {
 
-// ¹­ÐÎ
+// ï¿½ï¿½ï¿½ï¿½
 	
 		
 		switch(RunStep)
@@ -1248,24 +1248,35 @@ void CleanMode_Random(void)
 ***********************************************************************/
 void  CheckRun()
 {
-   switch(RunMode) {    
-			case 1 : // clean random Mode
-           			
-				CleanMode_Random();
-				break;
+   switch(RunMode) {
 
-			case 2: //clean zMode --edge line Mode
+	        case 0:
+						
+			break;    
+			case 1 : // powern on
+			    if( worksMode.iPowerFlag==1){
+           		  LED_R = 0;
+				  worksMode.iPowerFlag=1;
+				}
+				else {
+					LED_R =1;
+					worksMode.iPowerFlag=0;
+				}
+            break;
+
+			case 2: //sharp led function
 			   
-			    wallMode();
+			  
 				break; 
 
-			case 3: //clean bow Mode
+			case 3: //works mode function
+			        
+					wallMode();
 			
-				CleanMode_BOW();
 				break;
 
-			case 4: //fixpoint clean Mode
-				circleMode();
+			case 4: //mode transform function 
+				
 				break;
 
 			case 5:
@@ -1296,7 +1307,7 @@ void circleMode(void)
 			}
 				break;
 
-			case 1:  //³õÊ¼Ô­µØÓÒ×ªÈ¦
+			case 1:  //ï¿½ï¿½Ê¼Ô­ï¿½ï¿½ï¿½ï¿½×ªÈ¦
 			{								
 				InitMotorRightCircle();
 				RunStep=2;
@@ -1341,7 +1352,7 @@ void circleMode(void)
 			}
 				break;
 			
-			case 3:   //ºóÍË
+			case 3:   //ï¿½ï¿½ï¿½ï¿½
 			{
 				if(RunMs>30)
 				{
@@ -1363,7 +1374,7 @@ void circleMode(void)
 			}
 				break;
 
-			case 5:  //×ªÍä
+			case 5:  //×ªï¿½ï¿½
 			{
 				if(RunMs>20)
 				{
@@ -1374,7 +1385,7 @@ void circleMode(void)
 			}
 				break;
 
-			case 6:  //Ö±×ß
+			case 6:  //Ö±ï¿½ï¿½
 			{			
 				if(RunMs>150)
 				{
@@ -1387,7 +1398,7 @@ void circleMode(void)
 					
 			case 7:
 			{
-			if(RunMs>300)  //Ö±×ßÒ»¶Î¾àÀë£¬È»ºó»»×ªÏò
+			if(RunMs>300)  //Ö±ï¿½ï¿½Ò»ï¿½Î¾ï¿½ï¿½ë£¬È»ï¿½ï¿½×ªï¿½ï¿½
 				{
 					SetStop();				
 					RunStep=1;				
@@ -1415,7 +1426,7 @@ void circleMode(void)
 				break;
 			
 						
-			//ÓÒÄÚÈ¦
+			//ï¿½ï¿½ï¿½ï¿½È¦
 			case 0x10:{
 				if((WallDp[0]>WallMin)||(WallDp[1]>WallMin)||(WallDp[2]>WallMin)||(WallDp[3]>WallMin))
 				{
@@ -1451,7 +1462,7 @@ void circleMode(void)
 			}
 				break;
 			
-			//ÓÒÖÐÈ¦
+			//ï¿½ï¿½ï¿½ï¿½È¦
 			case 0x11:{
 				if((WallDp[0]>WallMin)||(WallDp[1]>WallMin)||(WallDp[2]>WallMin)||(WallDp[3]>WallMin))
 				{
@@ -1487,7 +1498,7 @@ void circleMode(void)
 			}
 				break;	
 
-			//ÓÒÍâÈ¦
+			//ï¿½ï¿½ï¿½ï¿½È¦
 			case 0x12:{
 				if((WallDp[0]>WallMin)||(WallDp[1]>WallMin)||(WallDp[2]>WallMin)||(WallDp[3]>WallMin))
 				{
@@ -1524,7 +1535,7 @@ void circleMode(void)
 				break;	
 
 #if 0   
-			case 0x08:   //Ô­µØ×ó×ª
+			case 0x08:   //Ô­ï¿½ï¿½ï¿½ï¿½×ª
 			{
 				InitMotorLeftCircle();
 				RunStep= 0x02;
@@ -1534,7 +1545,7 @@ void circleMode(void)
 				break;			
 			
 			
-			//×óÄÚÈ¦
+			//ï¿½ï¿½ï¿½ï¿½È¦
 			case 0x20:{
 				if((WallDp[0]>WallMin)||(WallDp[1]>WallMin)||(WallDp[2]>WallMin)||(WallDp[3]>WallMin))
 				{
@@ -1570,7 +1581,7 @@ void circleMode(void)
 			}
 				break;
 			
-			//×óÖÐÈ¦
+			//ï¿½ï¿½ï¿½ï¿½È¦
 			case 0x21:{
 				if((WallDp[0]>WallMin)||(WallDp[1]>WallMin)||(WallDp[2]>WallMin)||(WallDp[3]>WallMin))
 				{
@@ -1606,7 +1617,7 @@ void circleMode(void)
 			}
 				break;	
 
-			//×óÍâÈ¦
+			//ï¿½ï¿½ï¿½ï¿½È¦
 			case 0x22:{
 				if((WallDp[0]>WallMin)||(WallDp[1]>WallMin)||(WallDp[2]>WallMin)||(WallDp[3]>WallMin))
 				{
@@ -1714,7 +1725,7 @@ void wallMode(void)
 				SetStop();
 				findIR = 1;
 			}					
-			else {		//if(RunMs>800)	//ÍùÓÒÇ°·½×ß£¬Ò»Ö±´òÈ¦¼ì²â²»µ½£¬ÔòÏòÖ±×ßÒ»¶Î¾àÀë£¬ÖØÐÂ¼ì²â
+			else {		//if(RunMs>800)	//ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ß£ï¿½Ò»Ö±ï¿½ï¿½È¦ï¿½ï¿½â²»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½Ò»ï¿½Î¾ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½Â¼ï¿½ï¿½
 //				RunStep = 0x09;
 //				RunMs = 0;
 //				InitMotorForward();
@@ -1722,7 +1733,7 @@ void wallMode(void)
 			}
 			break;
 		
-		case 3: 		//ºóÍË retreat
+		case 3: 		//ï¿½ï¿½ï¿½ï¿½ retreat
 			if(RunMs>30){
 				InitMotorRetreat();
 				RunMs=0;
@@ -1738,7 +1749,7 @@ void wallMode(void)
 				}
 				break;
 
-			case 5:  //×ªÍä turn
+			case 5:  //×ªï¿½ï¿½ turn
 				if(RunMs>20){			
 					InitMotorLeft();
 					RunStep=6;
@@ -1749,7 +1760,7 @@ void wallMode(void)
 				}
 				break;
 
-			case 6:  //Ö±×ß	
+			case 6:  //Ö±ï¿½ï¿½	
 				if(RunMs>135){
 					InitMotorForward();
 					RunMs=0;
@@ -1766,7 +1777,7 @@ void wallMode(void)
 				}	
 				break;			
 					
-			case 7:  //Ö±×ßÒ»¶ÎÐ¡¾àÀë£¬È»ºó»»×ªÏò			
+			case 7:  //Ö±ï¿½ï¿½Ò»ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ë£¬È»ï¿½ï¿½×ªï¿½ï¿½			
 				if(RunMs>100){  			
 					RunStep=2;				
 					RunMs=0;
@@ -1798,7 +1809,7 @@ void wallMode(void)
 				}				
 				break;
 						
-			case 8:   //right IR check ²ÉÑù
+			case 8:   //right IR check ï¿½ï¿½ï¿½ï¿½
 				if(RunMs>10){
 					RunMs = 0;
 					
@@ -1814,7 +1825,7 @@ void wallMode(void)
 						RunStep = 0x02;
 						RunMs = 0;
 					}
-					else if(WallDp[1]<WallModeNormal){ //È«ËÙÖ±×ß
+					else if(WallDp[1]<WallModeNormal){ //È«ï¿½ï¿½Ö±ï¿½ï¿½
 						RunMs = 0;
 						InitMoterAdjustForward();
 					}					
@@ -1848,7 +1859,7 @@ void wallMode(void)
 				}
 				break;
 				
-			case 9:		//ÏòÇ°×ßÒ»¶Î³¤¾àÀë£¬ÖØÐÂÑ°ÕÒÇ½
+			case 9:		//ï¿½ï¿½Ç°ï¿½ï¿½Ò»ï¿½Î³ï¿½ï¿½ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½ï¿½Ñ°ï¿½ï¿½Ç½
 				if(RunMs>500){
 					RunMs = 0;
 					RunStep = 2;
@@ -1865,7 +1876,7 @@ void wallMode(void)
 				break;
 
 			
-		case 10: 		//ºóÍË retreat
+		case 10: 		//ï¿½ï¿½ï¿½ï¿½ retreat
 			if(RunMs>10){
 				InitMotorRetreat();
 				RunStep=11;
@@ -1884,7 +1895,7 @@ void wallMode(void)
 				}
 				break;
 
-			case 12:  //×ªÐ¡Íä turn
+			case 12:  //×ªÐ¡ï¿½ï¿½ turn
 				if(RunMs>20){			
 					InitMotorLeft();
 					RunMs=0;
@@ -1896,7 +1907,7 @@ void wallMode(void)
 				}
 				break;
 				
-			case 13:  //Ð¡ÇúÏßÓÒ×ª	
+			case 13:  //Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ª	
 				if(RunMs>80){		
 					if(wallRechargeModeFlag){
 						RunStep=7;	
@@ -2064,7 +2075,7 @@ void rechargeBatMode(void)
 			break;
 			
 		
-			case 3:   //ºóÍË
+			case 3:   //ï¿½ï¿½ï¿½ï¿½
 			{
 				if(RunMs>20)
 				{
@@ -2086,7 +2097,7 @@ void rechargeBatMode(void)
 			}
 				break;
 
-			case 5:  //×ªÍä
+			case 5:  //×ªï¿½ï¿½
 			{
 				if(RunMs>20)
 				{
@@ -2097,7 +2108,7 @@ void rechargeBatMode(void)
 			}
 				break;
 
-			case 6:  //Ö±×ß	
+			case 6:  //Ö±ï¿½ï¿½	
 				if(IMP>0)
 				{
 					NoImpSecond=0;
@@ -2625,6 +2636,7 @@ void rechargeBatMode(void)
 	*Return Ref:NO
 	*
 *************************************************************************************/
+#if 0
 void CheckMode(INT8U Key)
 {
 if(Key==1)
@@ -2807,7 +2819,7 @@ if(Key==1)
 				
 	
 		break;
-		// ï¿½ï¿½ï¿½ï¿½ÐµÆ¹ï¿½Æµï¿½ï¿„1¤7?0.5Hz
+		// ï¿½ï¿½ï¿½ï¿½ÐµÆ¹ï¿½Æµï¿½ï¿„1ï¿½7?0.5Hz
 		case 5: //fixPoint Mode
 			    RunMode =4;
 				RunStep =1;
@@ -2955,7 +2967,7 @@ if(Key==1)
 
     }
 }
-
+#endif 
 
 void sysMode(INT8U val)
 {
@@ -3065,7 +3077,7 @@ void sysMode(INT8U val)
 //			SysFlag = IDEL;
 			break;
 		
-		case 1:   //sËæ»ú
+		case 1:   //sï¿½ï¿½ï¿½
 			RunMode =1; //
 			RunStep =1;
 			SetBuzzerTime(4);
@@ -3077,7 +3089,7 @@ void sysMode(INT8U val)
 			break;		
 		
 		case 2:
-			RunMode =2; //ÑØ±ß
+			RunMode =2; //ï¿½Ø±ï¿½
 			RunStep =1;
 			SetBuzzerTime(4);
 			Delay_ms(10);
@@ -3093,7 +3105,7 @@ void sysMode(INT8U val)
 			break;
 		
 		case 3:
-			RunMode =3; //¹­
+			RunMode =3; //ï¿½ï¿½
 			RunStep =1;
 			SetBuzzerTime(4);
 			Delay_ms(10);
@@ -3134,7 +3146,7 @@ void sysMode(INT8U val)
 				SetEdge(250);		
 			break;
 			
-		case 5://´ý»úÄ£Ê½
+		case 5://ï¿½ï¿½ï¿½ï¿½Ä£Ê½
 //			RunMode =4; 
 //			RunStep =1;
 			SetStop();
@@ -3149,7 +3161,7 @@ void sysMode(INT8U val)
 			break;
 		
 		
-		case 6: //»Ø³äÄ£Ê½
+		case 6: //ï¿½Ø³ï¿½Ä£Ê½
 			RunMode =5;
 			RunStep =0;
 			SetBuzzerTime(4);

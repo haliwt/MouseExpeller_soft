@@ -44,7 +44,7 @@ typedef  struct  _state_
 
 key_types key;
 
-xdata struct _CleanMode cleanWorks;
+xdata struct _worksMode worksMode;
 /****************************************************
 	*
 	*Function Name: INT8U AutoDC_ReChargeStatus(void)
@@ -117,21 +117,21 @@ static INT8U KEY_Scan(void)
 	INT8U  reval = 0;
 
 	key.read = _KEY_ALL_OFF; //0x1F 
-    CheckKeyVoltage();
+    KEY_Voltage=CheckKeyVoltage();
 	g_KeyValue=KEY_Voltage%100; //WT.EDIT 2021.01.05
 	//SBUF =g_KeyValue;
 	//power key
-	if(g_KeyValue == 0x00 )
+	if(g_KeyValue == 0x00 && g_KeyValue != 0x03 && g_KeyValue !=0x07 )
     {
 		key.read &= ~0x01; // 0x1f | 0xfe = 0x1E 
 	}
 	//light led key
-	if(g_KeyValue == 0x03 || g_KeyValue == 0x04)
+	else if((g_KeyValue == 0x03 || g_KeyValue == 0x04)&& g_KeyValue !=0 && g_KeyValue != 0x07)
     {
 		key.read &= ~0x02; // 0x1f | 0xfd = 0x1D
 	}
 	//worksMode key
-	if(g_KeyValue == 0x08 || g_KeyValue == 0x07)
+	else if((g_KeyValue == 0x08 || g_KeyValue == 0x07)&& g_KeyValue != 0x03 && g_KeyValue !=0 )
     {
 		key.read &= ~0x04; // 0x1f | 0xfb = 0x1B
 	}
@@ -230,29 +230,41 @@ static INT8U KEY_Scan(void)
  ******************************************************************************/
  void KEY_Handing(void)
 {
-     // static INT8U pressflg =0;
-	  INT8U keyflg =0;
+      static INT8U pressflg =0;
+	   INT8U keyflg =0;
 	  keyflg = KEY_Scan();
 	 switch(keyflg)
 	{
         case _KEY_TRG_1_POWER   : 
-		     LED_R=0;
+		     RunMode =1 ;
+			 pressflg =pressflg ^ 0x01;
+			 if(pressflg==1)
+			     worksMode.iPowerFlag=1;
+			 else 
+			    worksMode.iPowerFlag=1;
+			
 			
 	   break;
 
 	   case _KEY_TRG_2_SHARP:
-			 LED_G =0;
+			 RunMode =2 ;
+			 keyflg=0xff;
 	   break;
 
 	   case _KEY_TRG_3_MODE :
-			 LED_B=0;
+			 RunMode =3 ;
+			 keyflg=0xff;
 	   break;
 
 	   case _KEY_CONT_3_MODE : //0x84 long press key
+	         RunMode =4 ; //works mode transform 
 	   		LED_R=1;
 			LED_B=1;
 			LED_G=1;
-
+             keyflg=0xff;
+	   break;
+	   default:
+		
 	   break;
 
 	}

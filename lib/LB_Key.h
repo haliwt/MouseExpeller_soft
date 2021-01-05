@@ -26,30 +26,28 @@ typedef INT8U uint8_t ;
 #define GROUP_PRES            3   
 
 enum  woksmode{
-   runWoksStatus =1 ,
-   randomMode  ,
-   zMode ,
-   bowMode,
-   fixpointMode ,
-   standbyMode,
+   runWoksStatus =0 ,
+   worksModeOne ,
+   worksModeTwo,
+   worksModeThree,
+   worksTransform,
    recharge
 };
-struct _CleanMode{
+struct _worksMode{
     INT8U iPowerFlag;
     INT8U worksNumber; 
-    INT8U CleanMode ;
     INT8U rechargeMode ;
-    INT8U pressPowerKey;
-    INT8U Clean_randomMode;
-    INT8U Clean_bowMode;
-    INT8U Clean_wallMode;
-    INT8U Clean_fixpointMode;
+    INT8U works_randomMode;
+    INT8U works_wallMode;
+    INT8U worksMode_1;
+    INT8U worksMode_2;
+    INT8U worksMode_3;
 
 
 };
 
 
-KAKA_Key_EXT xdata struct _CleanMode cleanWorks;
+KAKA_Key_EXT xdata struct _worksMode worksMode;
 
 
 KAKA_Key_EXT INT8U HDKey_Scan(INT8U mode);

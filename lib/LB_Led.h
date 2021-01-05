@@ -33,9 +33,9 @@ version  : ���ļ�β��
 #define CloseSwitch_L  			P1_5	
 #define CloseSwitch_R  			P3_2
 #define BatteryRechargStatus     P1_7
-#define LED_R             P2_7
-#define LED_G             P2_6
-#define LED_B             P3_5
+#define LED_R             P2_7  //17pin
+#define LED_G             P2_6 //18pin
+#define LED_B             P3_5 //23pin
 
   
 
