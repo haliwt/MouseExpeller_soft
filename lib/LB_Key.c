@@ -117,11 +117,10 @@ static INT8U KEY_Scan(void)
 	INT8U  reval = 0;
 
 	key.read = _KEY_ALL_OFF; //0x1F 
-	g_KeyValueHigh= _KEY_ALL_OFF;//WT.EDIT 
-	g_KeyValueLow =  _KEY_ALL_OFF;
+	g_KeyValueHigh=690;
     g_KeyValueHigh=CheckKeyVoltage();
 
-	g_KeyValueLow= g_KeyValueHigh%100; //WT.EDIT 2021.01.05
+	g_KeyValueLow= g_KeyValueHigh %100; //WT.EDIT 2021.01.05
 	//SBUF =g_KeyValue;
 	//power key
 	if(g_KeyValueLow == 0)
