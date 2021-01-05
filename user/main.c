@@ -90,15 +90,16 @@ void main(void)
 	LCurrentMax=150;
 	LCurrent=0;
 	RCurrent=0;
-	
+	LedAllOff();
 
 	while(1)
 	{
 		
 		
 		CheckWall();
-		//CheckKeyVoltage();
 		CheckRun();
+		//CheckKeyVoltage();
+		
 		KEY_Handing();
 		
 	
@@ -185,18 +186,20 @@ void TIMER1_Rpt(void) interrupt TIMER1_VECTOR
 	//	  Usart1Send[10]=IRLocation.FarLeft;
 	//	  Usart1Send[11]=IMP;
 	//	  Usart1Send[12]=RunStep;
-			SendCount=1;
-			SBUF=Usart1Send[SendCount];
+		//	SendCount=1;
+		//	SBUF=Usart1Send[SendCount];
 			}
 			#endif
-			g_KeyValue= KEY_Voltage % 100;
+			#if USART_FLAG 
+			g_KeyValueLow= CheckKeyVoltage();
+			//g_KeyValue= KEY_Voltage % 100;
 			Usart1Send[0]=2;
 			Usart1Send[1]=KEY_Voltage/100;
-			Usart1Send[2]=g_KeyValue;//KEY_Voltage%100;
+			Usart1Send[2]=g_KeyValueLow %100;//KEY_Voltage % 100;//KEY_Voltage%100;
 			
 			SendCount=1;
 			SBUF=Usart1Send[SendCount];
-			
+			#endif 
 			/*
 			Usart1Send[0]=12;
 			Usart1Send[1]=Voltage/100;

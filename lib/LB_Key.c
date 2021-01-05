@@ -117,21 +117,24 @@ static INT8U KEY_Scan(void)
 	INT8U  reval = 0;
 
 	key.read = _KEY_ALL_OFF; //0x1F 
-    KEY_Voltage=CheckKeyVoltage();
-	g_KeyValue=KEY_Voltage%100; //WT.EDIT 2021.01.05
+	g_KeyValueHigh= _KEY_ALL_OFF;//WT.EDIT 
+	g_KeyValueLow =  _KEY_ALL_OFF;
+    g_KeyValueHigh=CheckKeyVoltage();
+
+	g_KeyValueLow= g_KeyValueHigh%100; //WT.EDIT 2021.01.05
 	//SBUF =g_KeyValue;
 	//power key
-	if(g_KeyValue == 0x00 && g_KeyValue != 0x03 && g_KeyValue !=0x07 )
+	if(g_KeyValueLow == 0)
     {
 		key.read &= ~0x01; // 0x1f | 0xfe = 0x1E 
 	}
 	//light led key
-	else if((g_KeyValue == 0x03 || g_KeyValue == 0x04)&& g_KeyValue !=0 && g_KeyValue != 0x07)
+	else if(g_KeyValueLow== 0x03 || g_KeyValueLow == 0x04)
     {
 		key.read &= ~0x02; // 0x1f | 0xfd = 0x1D
 	}
 	//worksMode key
-	else if((g_KeyValue == 0x08 || g_KeyValue == 0x07)&& g_KeyValue != 0x03 && g_KeyValue !=0 )
+	else if(g_KeyValueLow == 0x07 || g_KeyValueLow == 0x08  )
     {
 		key.read &= ~0x04; // 0x1f | 0xfb = 0x1B
 	}
@@ -156,9 +159,11 @@ static INT8U KEY_Scan(void)
 			{
 				if(++key.on_time> 80) //消抖  0.5us
 				{
-					key.value = key.buffer^_KEY_ALL_OFF; // key.value = 0x1E ^ 0x1f = 0x01
-					key.on_time = 0;
-					key.state   = second;
+					
+						key.value = key.buffer^_KEY_ALL_OFF; // key.value = 0x1E ^ 0x1f = 0x01
+						key.on_time = 0;
+						key.state   = second;
+					
 				}
 			}
 			else
@@ -230,38 +235,52 @@ static INT8U KEY_Scan(void)
  ******************************************************************************/
  void KEY_Handing(void)
 {
-      static INT8U pressflg =0;
+      static INT8U pressflg =0,n,m;
 	   INT8U keyflg =0;
 	  keyflg = KEY_Scan();
 	 switch(keyflg)
 	{
         case _KEY_TRG_1_POWER   : 
-		     RunMode =1 ;
+		    // RunMode =1 ;
 			 pressflg =pressflg ^ 0x01;
-			 if(pressflg==1)
+			 if(pressflg==1){
 			     worksMode.iPowerFlag=1;
-			 else 
+				 LED_R=0;
+			 	}
+			 else {
 			    worksMode.iPowerFlag=0;
+				LED_R=1;
+			 	}
 			
 			
 	   break;
 
 	   case _KEY_TRG_2_SHARP:
-			 RunMode =2 ;
-			 keyflg=0xff;
+			// RunMode =2 ;
+			  n=n ^ 0x01;
+			 if(n==1)
+			    LED_G=0;
+			 else 
+			    LED_G=1;
+			 
 	   break;
 
 	   case _KEY_TRG_3_MODE :
-			 RunMode =3 ;
-			 keyflg=0xff;
+	   	     //RunMode =3 ;
+			  m=m ^ 0x01;
+			 if(m==1)
+			    LED_B=0;
+			 else 
+			    LED_B=1;
+			 
 	   break;
 
 	   case _KEY_CONT_3_MODE : //0x84 long press key
-	         RunMode =4 ; //works mode transform 
+	        // RunMode =4 ; //works mode transform 
 	   		LED_R=1;
 			LED_B=1;
 			LED_G=1;
-             keyflg=0xff;
+          
 	   break;
 	   default:
 		

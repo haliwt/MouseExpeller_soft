@@ -1256,22 +1256,24 @@ void  CheckRun()
 			case 1 : // powern on
 			    if( worksMode.iPowerFlag==1){
            		    LED_R = 0;
+				
 				   
 				}
 				else {
 					LED_R =1;
 					
+					
 				}
             break;
 
 			case 2: //sharp led function
-			   
+			    LED_G = 0;
 			  
 				break; 
 
 			case 3: //works mode function
-			        
-					wallMode();
+			       LED_B=0; 
+					//wallMode();
 			
 				break;
 

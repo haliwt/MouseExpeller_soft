@@ -316,25 +316,33 @@ void CheckVoltage()
 **********************************************************************/
 INT8U  CheckKeyVoltage(void)
 {
-   INT8U ad[10],i,j;
+   INT8U ad[20],i,j,z;
    INT16U adcValue;
    SetAD(8);
+	
    adcValue=(Voltage*9+(AD5ms[8]/4))/10;
+   //KEY_Voltage=adcValue;
    //4000*3/40960
+   #if 1
    i++;
    ad[i-1]=adcValue /100;
-   if(i==10){
+   if(i==20){
       i=0;
-	 for(j=0;j<10;j++){
+	  z=1;
+	 for(j=0;j<20;j++){
 
        KEY_Voltage=KEY_Voltage+ad[j];
-      }
+	   
+     }
 	 
-       KEY_Voltage= KEY_Voltage/10;
-	
+       KEY_Voltage= KEY_Voltage/20;
+	   
 	}
-   return KEY_Voltage;
-  
+   if(z==1){
+      return KEY_Voltage;
+	  z=0;
+   }
+   #endif 
  }
 /***************************************************************************************
   * @说锟斤拷  	ADC锟叫断凤拷锟斤拷锟斤�?
