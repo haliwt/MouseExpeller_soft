@@ -33,6 +33,7 @@ KAKA_Run_EXT   INT8U Mode;
 KAKA_Run_EXT  INT8U Step;
 KAKA_Run_EXT  INT8U RunMode;
 KAKA_Run_EXT  INT8U RunStep;
+KAKA_Run_EXT  INT8U DiffMode;
 KAKA_Run_EXT  INT8U RunNoIRsenorTime;
 KAKA_Run_EXT  INT8U RunNoIRsenorLastStep;
 KAKA_Run_EXT  INT8U  EdgeTime;

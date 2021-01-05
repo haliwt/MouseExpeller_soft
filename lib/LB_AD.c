@@ -320,10 +320,10 @@ INT8U  CheckKeyVoltage(void)
    INT16U adcValue;
    SetAD(8);
 	
-   adcValue=(Voltage*9+(AD5ms[8]/4))/10;
+   KEY_Voltage=(Voltage*9+(AD5ms[8]/4))/10;
    //KEY_Voltage=adcValue;
    //4000*3/40960
-   #if 1
+   #if 0
    i++;
    ad[i-1]=adcValue /100;
    if(i==20){

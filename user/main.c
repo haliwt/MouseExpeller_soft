@@ -63,7 +63,7 @@ void InitSysclk(INT8U SYS)
 void main(void)
 {
 	
-	INT8U kk;
+	INT8U kk,i,abc[3],z=0;
 	
 	
 	InitSysclk(1);
@@ -104,27 +104,35 @@ void main(void)
 		 CheckKeyVoltage();
 		// KEY_Scan();
 		// kk =g_KeyValue;
-		 g_KeyValue= KEY_Voltage %100;
-		 if(g_KeyValue==0x04){
+		 g_KeyValue= KEY_Voltage /100;
+		SBUF = g_KeyValue;
+		
+		 if(g_KeyValue ==0x00){
+			 RunMode =1;
+			 LED_B = 1;
+			 DiffMode = 1;
+
+		 }
+		  if(g_KeyValue==0x04 ||g_KeyValue==0x03){
 		     LED_B=1;
 			 RunMode =2;
 		   // Sharp_LED();
-			
-			
-			 
-		 }
-		 else if(g_KeyValue ==0x00){
-			//RunMode =1;
-			 LED_B = 1;
-
-		 }
-		 else if(g_KeyValue == 0x08){
-			LED_B = 0;
-			SharpTime_Hz=0;
+			 DiffMode =2;
+			  SharpTime_Hz=0;
 			SharpWorksTime_Total=0;
 			SharpWorksTime=0;
-			 //RunMode =3;
+			
+		 }
+		
+		  if(g_KeyValue == 0x08 ||g_KeyValue==0x07){
+			DiffMode = 3;
+			RunMode =3;
+				  SharpTime_Hz=0;
+		SharpWorksTime_Total=0;
+		SharpWorksTime=0;
+			
          }
+	 }
 		// KEY_Handing(kk);
 		//Sharp_LED();
 		
@@ -141,7 +149,7 @@ void main(void)
 		#endif 
 		
 	}
-}
+
 
 
 void TIMER1_Rpt(void) interrupt TIMER1_VECTOR
@@ -171,7 +179,7 @@ void TIMER1_Rpt(void) interrupt TIMER1_VECTOR
 		SharpTime_Hz++;
 		SharpWorksTime_Total++;
 		SetMotorForwardPWMUP();
-		//g_KeyValue=KEY_Voltage %100;
+		g_KeyValue=KEY_Voltage %100;
 		if(t_100ms>9)
 		{
 			t_100ms=0;

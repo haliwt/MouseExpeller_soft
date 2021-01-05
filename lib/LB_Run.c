@@ -1267,10 +1267,11 @@ void  CheckRun()
             break;
 
 			case 2: //sharp led function
-			    LED_G = 0;
-			    LED_B=0;
-			    Sharp_LED();
-				
+				if(DiffMode ==2){
+					LED_G = 0;
+					LED_B=0;
+					Sharp_LED();
+				}
 				break; 
 
 			case 3: //works mode function
