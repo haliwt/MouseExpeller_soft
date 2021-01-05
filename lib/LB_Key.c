@@ -322,6 +322,8 @@ void Sharp_LED(INT8U sharp)
 	   else {
 
 		 SharpWorksTime_Total =0;
+		  SharpWorksTime =0;
+		  SharpTime_Hz=0;
 		 P2_0=0;
 		 sharp=2;
 
@@ -350,7 +352,9 @@ void Sharp_LED(INT8U sharp)
 	   }
 	   else {
 
-		 SharpWorksTime_Total = 0;
+		  SharpWorksTime_Total =0;
+		  SharpWorksTime =0;
+		  SharpTime_Hz=0;
 		 P2_0=0;
 		 sharp =3;
 
@@ -379,7 +383,9 @@ void Sharp_LED(INT8U sharp)
 	   }
 	   else {
 
-		 SharpWorksTime_Total = 0;
+		 SharpWorksTime_Total =0;
+		  SharpWorksTime =0;
+		  SharpTime_Hz=0;
 		 P2_0=0;
 		 sharp =1;
 

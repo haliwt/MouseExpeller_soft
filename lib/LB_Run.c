@@ -1256,8 +1256,9 @@ void  CheckRun()
 			case 1 : // powern on
 			    
            		    LED_R = 0;
-				
-				   
+				    RunStep = 0;
+				    DiffMode =1;
+			        P2_0 =0;
 			
             break;
 
@@ -1267,6 +1268,10 @@ void  CheckRun()
 					LED_B=0;
 					RunStep = 0x01;
 					Sharp_LED(1);
+				}
+				else{
+				
+				  RunStep = 0;
 				}
 				break; 
 

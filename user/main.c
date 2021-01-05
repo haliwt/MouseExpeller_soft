@@ -95,7 +95,7 @@ void main(void)
 	SharpTime_Hz=0;
 	SharpWorksTime_Total=0;
 	SharpWorksTime=0;
-
+     g_KeyValue=0xff;
 	while(1)
 	{
 		
@@ -105,13 +105,13 @@ void main(void)
 		 CheckKeyVoltage();
 		// KEY_Scan();
 		// kk =g_KeyValue;
-		 g_KeyValue= KEY_Voltage /100;
+		// g_KeyValue= KEY_Voltage /100;
 		 i++;
 		 abc[i]=g_KeyValue;
 		 if(i >=2)
 		 {
 		    i=0;
-			if(abc[1]==abc[2])g_KeyValue= KEY_Voltage /100;
+			if(abc[1]==abc[3])g_KeyValue= KEY_Voltage /100;
 			 else g_KeyValue= 0xff;
 			 z=1;
 		 }
@@ -184,6 +184,7 @@ void TIMER1_Rpt(void) interrupt TIMER1_VECTOR
   t_10ms++;  //0.1ms 
 	
   ReadAD5ms();
+ 
  // MidIR_Count();
 
 	if(t_1ms++>10){
@@ -200,7 +201,7 @@ void TIMER1_Rpt(void) interrupt TIMER1_VECTOR
 		SharpTime_Hz++;
 		SharpWorksTime_Total++;
 		SetMotorForwardPWMUP();
-		//g_KeyValue=KEY_Voltage / 100;
+		g_KeyValue=KEY_Voltage / 100;
 		if(t_100ms>9)
 		{
 			t_100ms=0;
@@ -258,7 +259,7 @@ void TIMER1_Rpt(void) interrupt TIMER1_VECTOR
 			Usart1Send[3] = RunMode ;
 			SendCount=1;
 			SBUF=Usart1Send[SendCount];
-			// g_KeyValue=KEY_Voltage %100;
+			
 			#endif 
 			/*
 			Usart1Send[0]=12;
