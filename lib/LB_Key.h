@@ -53,6 +53,8 @@ KAKA_Key_EXT xdata struct _worksMode worksMode;
 KAKA_Key_EXT INT8U HDKey_Scan(INT8U mode);
 
 KAKA_Key_EXT INT8U AutoDC_ReChargeStatus(void);
-KAKA_Key_EXT void KEY_Handing(void);
+KAKA_Key_EXT void KEY_Handing(INT8U key);
+KAKA_Key_EXT void Sharp_LED(void);
+ KAKA_Key_EXT INT8U KEY_Scan(void);
 
 #endif 

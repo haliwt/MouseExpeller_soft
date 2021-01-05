@@ -1268,7 +1268,7 @@ void  CheckRun()
 
 			case 2: //sharp led function
 			    LED_G = 0;
-			  
+			    Sharp_LED();
 				break; 
 
 			case 3: //works mode function

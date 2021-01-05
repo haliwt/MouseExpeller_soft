@@ -42,6 +42,9 @@ KAKA_Run_EXT  INT8U keyPrssTime; //WT.EDIT .2021.01.05
 
 
 KAKA_Run_EXT  INT16U RunMs;
+KAKA_Run_EXT  INT16U SharpTime_Hz;
+KAKA_Run_EXT  INT8U  SharpWorksTime_Total;
+KAKA_Run_EXT  INT8U  SharpWorksTime;
 
 KAKA_Run_EXT  INT16U Imp2Time;
 

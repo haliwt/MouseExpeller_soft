@@ -91,6 +91,9 @@ void main(void)
 	LCurrent=0;
 	RCurrent=0;
 	LedAllOff();
+	SharpTime_Hz=0;
+	SharpWorksTime_Total=0;
+	SharpWorksTime=0;
 
 	while(1)
 	{
@@ -98,9 +101,34 @@ void main(void)
 		
 		CheckWall();
 		CheckRun();
-		//CheckKeyVoltage();
-		
-		KEY_Handing();
+		// CheckKeyVoltage();
+		 KEY_Scan();
+		 kk =g_KeyValue;
+		 
+		 if(g_KeyValue==0x04){
+		     LED_B=1;
+		   // Sharp_LED();
+			RunMode =2;
+			 SharpTime_Hz=0;
+			SharpWorksTime_Total=0;
+			SharpWorksTime=0;
+			 
+		 }
+		 else if(g_KeyValue ==0x00){
+				SharpTime_Hz=0;
+			SharpWorksTime_Total=0;
+			SharpWorksTime=0;
+
+		 }
+		 else if(g_KeyValue == 0x08){
+			//LED_B = 0;
+			 SharpTime_Hz=0;
+			SharpWorksTime_Total=0;
+			SharpWorksTime=0;
+			 RunMode =3;
+         }
+		// KEY_Handing(kk);
+		//Sharp_LED();
 		
 	
 		#if 0
@@ -142,7 +170,10 @@ void TIMER1_Rpt(void) interrupt TIMER1_VECTOR
 		t_100ms++;
 		t_1s++;
 		RunMs++;
+		SharpTime_Hz++;
+		SharpWorksTime_Total++;
 		SetMotorForwardPWMUP();
+		g_KeyValue=KEY_Voltage %100;
 		if(t_100ms>9)
 		{
 			t_100ms=0;
@@ -169,6 +200,7 @@ void TIMER1_Rpt(void) interrupt TIMER1_VECTOR
 			t_1s=0;
 			keyPrssTime++; 
 			twinkle++;
+			SharpWorksTime++;
 			MidWallOffSecond++;
 			#if 0
 			if(SendCount>=12)
@@ -191,14 +223,15 @@ void TIMER1_Rpt(void) interrupt TIMER1_VECTOR
 			}
 			#endif
 			#if USART_FLAG 
-			g_KeyValueLow= CheckKeyVoltage();
+			//g_KeyValueLow= CheckKeyVoltage();
 			//g_KeyValue= KEY_Voltage % 100;
 			Usart1Send[0]=2;
 			Usart1Send[1]=KEY_Voltage/100;
-			Usart1Send[2]=g_KeyValueLow %100;//KEY_Voltage % 100;//KEY_Voltage%100;
+			Usart1Send[2]=KEY_Voltage %100;//KEY_Voltage % 100;//KEY_Voltage%100;
 			
 			SendCount=1;
 			SBUF=Usart1Send[SendCount];
+			 g_KeyValue=KEY_Voltage %100;
 			#endif 
 			/*
 			Usart1Send[0]=12;

@@ -112,28 +112,28 @@ static void	key_value_init(void)
  ** Return Ref:NO
  **   
  ******************************************************************************/
-static INT8U KEY_Scan(void)
+INT8U KEY_Scan(void)
 {
 	INT8U  reval = 0;
 
 	key.read = _KEY_ALL_OFF; //0x1F 
 	g_KeyValueHigh=690;
-    g_KeyValueHigh=CheckKeyVoltage();
+    CheckKeyVoltage();
 
-	g_KeyValueLow= g_KeyValueHigh %100; //WT.EDIT 2021.01.05
+	//g_KeyValue= KEY_Voltage %100;//WT.EDIT 2021.01.05
 	//SBUF =g_KeyValue;
 	//power key
-	if(g_KeyValueLow == 0)
+	if(g_KeyValue == 0)
     {
 		key.read &= ~0x01; // 0x1f | 0xfe = 0x1E 
 	}
 	//light led key
-	else if(g_KeyValueLow== 0x03 || g_KeyValueLow == 0x04)
+	else if(g_KeyValue== 0x03 || g_KeyValue == 0x04)
     {
 		key.read &= ~0x02; // 0x1f | 0xfd = 0x1D
 	}
 	//worksMode key
-	else if(g_KeyValueLow == 0x07 || g_KeyValueLow == 0x08  )
+	else if(g_KeyValue == 0x07 || g_KeyValue == 0x08  )
     {
 		key.read &= ~0x04; // 0x1f | 0xfb = 0x1B
 	}
@@ -232,14 +232,14 @@ static INT8U KEY_Scan(void)
  ** Return Ref:NO
  **   
  ******************************************************************************/
- void KEY_Handing(void)
+ void KEY_Handing(INT8U key)
 {
       static INT8U pressflg =0,n,m;
 	   INT8U keyflg =0;
-	  keyflg = KEY_Scan();
-	 switch(keyflg)
+	  //keyflg = KEY_Scan();
+	 switch(key)
 	{
-        case _KEY_TRG_1_POWER   : 
+		 case 0x00://_KEY_TRG_1_POWER   : 
 		    // RunMode =1 ;
 			 pressflg =pressflg ^ 0x01;
 			 if(pressflg==1){
@@ -254,17 +254,23 @@ static INT8U KEY_Scan(void)
 			
 	   break;
 
-	   case _KEY_TRG_2_SHARP:
-			// RunMode =2 ;
+		 case 0x04://_KEY_TRG_2_SHARP:
+			RunMode =2 ;
 			  n=n ^ 0x01;
-			 if(n==1)
+			 if(n==1){
 			    LED_G=0;
+				SharpTime_Hz=0;
+				SharpWorksTime_Total=0;
+				SharpWorksTime=0;
+				RunMode =2;
+
+			 }
 			 else 
 			    LED_G=1;
 			 
 	   break;
 
-	   case _KEY_TRG_3_MODE :
+		 case 0x08: //_KEY_TRG_3_MODE :
 	   	     //RunMode =3 ;
 			  m=m ^ 0x01;
 			 if(m==1)
@@ -291,4 +297,33 @@ static INT8U KEY_Scan(void)
 }
 
 
+void Sharp_LED(void)
+{
+   //10HZ ,50% works =1s stop =4s total =60s 10HZ
+   if(SharpWorksTime_Total<=60){
+	   if(SharpWorksTime <=1){
+		   if(SharpTime_Hz <=5 ){
+		      P2_0 =1;
+		    }
+		   else if(SharpTime_Hz <=10 && SharpTime_Hz >5 ){
+		     P2_0=0;
+			 
+		    }
+		   if(SharpTime_Hz>=10)SharpTime_Hz=0;
+	   }
+	   else  if(SharpWorksTime > 1 && SharpWorksTime <=5){
+	        P2_0=0;
+		   SharpWorksTime =0;
+	    
+	   }
+   }
+   else {
+
+     SharpWorksTime_Total = 80;
+	 P2_0=0;
+
+   }
+   
+
+}
 
