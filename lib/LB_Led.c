@@ -50,12 +50,17 @@ void InitLed(void)
   P2M6 =0x84 ;//P3M5=0X94;
   
   P2M7 = 0x84;//P3M4=0X94;
-  P2_6=1;   //LED3 =
-  P2_7=1;  //LED2= 
-  P3_5 = 1;  //LED1=
+  P2_6=1;   //LED2=  light led
+  P2_7=1;  //LED1= power on
+  P3_5 = 1;  //LED3= mode 
 }
 
-
+void LedAllOff(void)
+{
+   P2_6=1;   //LED3 = 
+   P2_7=1;  //LED2= 
+   P3_5 = 1;  //LED3 = power on
+}
 
 void LedRedON()
 {

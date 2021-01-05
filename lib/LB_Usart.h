@@ -28,7 +28,7 @@ version  : ¼ûÎÄ¼þÎ²¶Ë
 #define  KAKA_Usart_EXT extern
 #endif
 
-#define USART_FLAG    0
+#define USART_FLAG    1
 KAKA_Usart_EXT INT8U SendCount;
 KAKA_Usart_EXT INT8U Usart1Send[20];
 KAKA_Usart_EXT  void Init_Usart1();

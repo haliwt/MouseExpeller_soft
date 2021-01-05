@@ -35,11 +35,16 @@ KAKA_Run_EXT  INT8U RunMode;
 KAKA_Run_EXT  INT8U RunStep;
 KAKA_Run_EXT  INT8U RunNoIRsenorTime;
 KAKA_Run_EXT  INT8U RunNoIRsenorLastStep;
-KAKA_Run_EXT  INT16U RunMs;
 KAKA_Run_EXT  INT8U  EdgeTime;
 KAKA_Run_EXT  INT8U BatteryRechargeFlag;//WT.EDIT
+KAKA_Run_EXT  INT8U twinkle;  //WT.EDIT 
+KAKA_Run_EXT  INT8U keyPrssTime; //WT.EDIT .2021.01.05
+
+
+KAKA_Run_EXT  INT16U RunMs;
+
 KAKA_Run_EXT  INT16U Imp2Time;
-KAKA_Run_EXT  INT16U twinkle;  //WT.EDIT 
+
 KAKA_Run_EXT  INT16U ImpSecond;
 KAKA_Run_EXT  INT16U Imp2Second;
 

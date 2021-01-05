@@ -65,6 +65,7 @@ void main(void)
 	
 	INT8U kk;
 	
+	
 	InitSysclk(1);
 	InitT1();
 	InitADIO();
@@ -89,6 +90,7 @@ void main(void)
 	LCurrentMax=150;
 	LCurrent=0;
 	RCurrent=0;
+	LedAllOff();
 
 	while(1)
 	{
@@ -96,10 +98,13 @@ void main(void)
 		
 		CheckWall();
 		CheckKeyVoltage();
+		g_KeyValue=KEY_Voltage%100; //WT.EDIT 2021.01.05
+		SBUF =g_KeyValue; 
 		switch(g_KeyValue){
 
 		case 0x08 : //Mode transform
-			LED_B =0;
+			
+			 LED_B =0;
             
 		break;
 		case 0x07:
@@ -114,7 +119,7 @@ void main(void)
 				g_KeyValue = 0x04;
 		break;
 
-		case 0:
+		case 0: //power on 
 			 LED_R = 0;
 
 		break;
@@ -136,7 +141,7 @@ void main(void)
 
 void TIMER1_Rpt(void) interrupt TIMER1_VECTOR
 {
-	static INT8U t_1ms;  //vic
+  static INT8U t_1ms;  //vic
   static INT8U t_10ms;
   static INT8U t_100ms;
   static INT8U t_1s;
@@ -177,13 +182,17 @@ void TIMER1_Rpt(void) interrupt TIMER1_VECTOR
 			
 			//LedTip(SysFlag);
 		}
+		//g_KeyValue=KEY_Voltage%100; //WT.EDIT 2021.01.05
+		//SBUF =g_KeyValue; 
 		CheckVoltage();
-		if(t_1s>99)
+
+		if(t_1s>99) //1s 
 		{
 			t_1s=0;
+			keyPrssTime++; 
 			twinkle++;
 			MidWallOffSecond++;
-				#if 0
+			#if 0
 			if(SendCount>=12)
 			{
 	//	  Usart1Send[0]=12;
@@ -202,14 +211,14 @@ void TIMER1_Rpt(void) interrupt TIMER1_VECTOR
 			SendCount=1;
 			SBUF=Usart1Send[SendCount];
 			}
-			#endif 
-			 g_KeyValue=KEY_Voltage%100;
-			Usart1Send[0]=2;
-			Usart1Send[1]=KEY_Voltage/100;
-			Usart1Send[2]=g_KeyValue;//KEY_Voltage%100;
+			#endif
 			
-			SendCount=1;
-			SBUF=Usart1Send[SendCount];
+//			Usart1Send[0]=2;
+//			Usart1Send[1]=KEY_Voltage/100;
+//			Usart1Send[2]=g_KeyValue;//KEY_Voltage%100;
+//			
+//			SendCount=1;
+//			SBUF=Usart1Send[SendCount];
 			
 			/*
 			Usart1Send[0]=12;
