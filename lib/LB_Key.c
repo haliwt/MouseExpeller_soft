@@ -297,33 +297,96 @@ INT8U KEY_Scan(void)
 }
 
 
-void Sharp_LED(void)
+void Sharp_LED(INT8U sharp)
 {
-   //10HZ ,50% works =1s stop =4s total =60s 10HZ
-   if(SharpWorksTime_Total<=60){
-	   if(SharpWorksTime <=1){
-		   if(SharpTime_Hz <=5 ){
-		      P2_0 =1;
-		    }
-		   else if(SharpTime_Hz <=10 && SharpTime_Hz >5 ){
-		     P2_0=0;
-			 
-		    }
-		   if(SharpTime_Hz>=10)SharpTime_Hz=0;
+   switch(sharp){
+	   case 1:
+		//10HZ ,50% ,T= 100ms works =1s stop =4s total =60s 10HZ
+	   if(SharpWorksTime_Total<=60){
+		   if(SharpWorksTime <=1){
+			   if(SharpTime_Hz <=5 ){ //50ms
+				  P2_0 =1;
+				}
+			   else if(SharpTime_Hz <=10 && SharpTime_Hz >5 ){
+				 P2_0=0;
+				 
+				}
+			   if(SharpTime_Hz>=10)SharpTime_Hz=0;
+		   }
+		   else  if(SharpWorksTime > 1 && SharpWorksTime <=5){
+				P2_0=0;
+			   SharpWorksTime =0;
+			
+		   }
 	   }
-	   else  if(SharpWorksTime > 1 && SharpWorksTime <=5){
-	        P2_0=0;
-		   SharpWorksTime =0;
-	    
+	   else {
+
+		 SharpWorksTime_Total =0;
+		 P2_0=0;
+		 sharp=2;
+
 	   }
-   }
-   else {
+	   
+   break;
+	   
+	   case 2://5Hz 
+		  //5HZ ,50% ,T= 200ms ,works =2s stop =8s total =120s 
+	   if(SharpWorksTime_Total<=120){
+		   if(SharpWorksTime <=2){
+			   if(SharpTime_Hz <=10 ){ //
+				  P2_0 =1;
+				}
+			   else if(SharpTime_Hz <=20 && SharpTime_Hz >10 ){
+				 P2_0=0;
+				 
+				}
+			   if(SharpTime_Hz>=20)SharpTime_Hz=0;
+		   }
+		   else  if(SharpWorksTime > 2 && SharpWorksTime <=10){
+				  P2_0=0;
+			      SharpWorksTime =0;
+			
+		   }
+	   }
+	   else {
 
-     SharpWorksTime_Total = 80;
-	 P2_0=0;
+		 SharpWorksTime_Total = 0;
+		 P2_0=0;
+		 sharp =3;
 
-   }
-   
+	   }
+	   
+	   
+	   break;
+	   case 3:
+		     //3HZ ,50% ,T= 333ms ,works =3s stop =12s total =120s 
+	   if(SharpWorksTime_Total<=150){
+		   if(SharpWorksTime <=3){
+			   if(SharpTime_Hz <=16 ){ //333/2= 166ms
+				  P2_0 =1;
+				}
+			   else if(SharpTime_Hz <=32 && SharpTime_Hz >16 ){
+				 P2_0=0;
+				 
+				}
+			   if(SharpTime_Hz>=32)SharpTime_Hz=0;
+		   }
+		   else  if(SharpWorksTime > 3 && SharpWorksTime <=15){
+				  P2_0=0;
+			      SharpWorksTime =0;
+			
+		   }
+	   }
+	   else {
+
+		 SharpWorksTime_Total = 0;
+		 P2_0=0;
+		 sharp =1;
+
+	   }
+	   
+	   break;
 
 }
+ }
 

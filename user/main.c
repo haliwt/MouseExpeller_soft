@@ -129,6 +129,9 @@ void main(void)
 			 RunMode =2;
 		   // Sharp_LED();
 			 DiffMode =2;
+			  SharpTime_Hz=0;
+		    SharpWorksTime_Total=0;
+		     SharpWorksTime=0;
 			 
 			
 		 }
@@ -146,9 +149,7 @@ void main(void)
 				LED_B =1;
 
 			}
-		    SharpTime_Hz=0;
-		    SharpWorksTime_Total=0;
-		     SharpWorksTime=0;
+		  
 			
          }
 	 }

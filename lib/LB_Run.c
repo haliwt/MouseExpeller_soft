@@ -1265,7 +1265,8 @@ void  CheckRun()
 				if(DiffMode ==2 && DiffMode !=1){
 					LED_G = 0;
 					LED_B=0;
-					Sharp_LED();
+					RunStep = 0x01;
+					Sharp_LED(1);
 				}
 				break; 
 
@@ -1289,9 +1290,12 @@ void  CheckRun()
    }
    switch(RunStep){
 
-      case 0x01:
-
-
+       case 0:
+		   
+	   break;
+	   case 0x01:
+          Sharp_LED(1);
+          RunStep = 0x01;
       break;
 
 
