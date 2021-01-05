@@ -53,7 +53,7 @@ void InitLed(void)
   P2_7=1;  //LED1= power on
   P3_5 = 1;  //LED3= mode 
 
-  P2M0 = 0xA0; //output pull  爆闪灯
+  P2M0 = 0xA0; //output pull UP 爆闪灯
   P2_0 =0 ;
 }
 
