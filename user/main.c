@@ -118,13 +118,13 @@ void main(void)
 		//SBUF = g_KeyValue;
 		if(z==1){
 			z=0;
-		 if(g_KeyValue ==0x00 ||g_KeyValue==0x01 ){
+		 if(g_KeyValue ==0x00 ||g_KeyValue==0x01||g_KeyValue==0x02){
 			 RunMode =1;
 			 LED_B = 1;
 			 DiffMode = 1;
 
 		 }
-		  if(g_KeyValue==0x04 ||g_KeyValue==0x03){
+		  if(g_KeyValue==0x04 || g_KeyValue==0x03){
 		      LED_B=1;
 			 RunMode =2;
 		   // Sharp_LED();
